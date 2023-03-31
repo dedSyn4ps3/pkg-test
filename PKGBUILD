@@ -8,8 +8,8 @@ url="https://github.com/dedSyn4ps3/pkg-test"
 license=('MIT')
 depends=('cairo' 'desktop-file-utils' 'gdk-pixbuf2' 'glib2' 'gtk3' 'hicolor-icon-theme' 'pango' 'webkit2gtk')
 makedepends=(
-    "npm"
-    "nodejs"
+    "npm==8.19.3"
+    "nodejs==16.19.1"
     "rustup"
     "git"
     "webkit2gtk"
@@ -22,7 +22,7 @@ makedepends=(
     "libappindicator-gtk3"
     "librsvg"
     "libvips"
-    "debtap"
+    "ar"
 )
 provides=("pkg-test")
 conflicts=("pkg-test")
@@ -44,9 +44,15 @@ build() {
 }
 
 package() {
-    cd "$pkgname-$pkgver"
-    cd "src-tauri/target/release/bundle/deb"
-    debtap -Q "${pkgname}_${pkgver}_amd64.deb"
+    cd "${pkgname}-${pkgver}/src-tauri/target/release/bundle/deb/${pkgname}_${pkgver}_amd64/data"
 
-    cp "${pkgname}-${pkgver}-${pkgrel}-.pkg.tar.zst" "$pkgname-$pkgver"
+    for size in 32x32 128x128 256x256; do
+        install -Dm644 "usr/share/icons/hicolor/${size}/apps/${pkgname}.png" "${pkgdir}/usr/share/icons/hicolor/${size}/apps/${pkgname}.png"
+    done
+
+    install -Dm644 "usr/share/desktop/${pkgname}.desktop" "${pkgdir}/usr/share/applications/${pkgname}.desktop"
+
+    install -Dm755 "usr/bin/${pkgname}" "${pkgdir}/usr/bin/${pkgname}"
+
+    install -Dm755 "usr/share/scripts/" "${pkgdir}/usr/share/${pkgname}/scripts"
 }

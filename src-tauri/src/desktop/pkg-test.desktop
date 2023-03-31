@@ -1,0 +1,9 @@
+[Desktop Entry]
+Comment=Test Package Tauri App
+Terminal=false
+Type=Application
+Categories=GTK;System;
+StartupNotify=false
+Name=pkg-test
+Exec=/usr/bin/pkg-test
+Icon=/usr/share/icons/hicolor/32x32/apps/pkg-test.png
