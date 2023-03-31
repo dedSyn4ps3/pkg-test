@@ -53,5 +53,8 @@ package() {
 
     install -Dm755 "usr/bin/${pkgname}" "${pkgdir}/usr/bin/${pkgname}"
 
-    install -Dm755 "usr/share/scripts/" "${pkgdir}/usr/share/${pkgname}/scripts"
+    install -Dm755 "usr/share/scripts/*" "${pkgdir}/usr/share/${pkgname}/scripts"
+
+    echo
+    echo "[*] PKGBUILD COMPLETE [*]"
 }
