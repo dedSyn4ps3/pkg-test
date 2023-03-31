@@ -1,6 +1,6 @@
 # Maintainer: Ed Rutherford <erutherford@nullsecurity.tech>
 pkgname=pkg-test
-pkgver=1.0.0
+pkgver=1.0.1
 pkgrel=1
 pkgdesc="For testing Tauri app script execution"
 arch=('x86_64')
@@ -8,8 +8,8 @@ url="https://github.com/dedSyn4ps3/pkg-test"
 license=('MIT')
 depends=('cairo' 'desktop-file-utils' 'gdk-pixbuf2' 'glib2' 'gtk3' 'hicolor-icon-theme' 'pango' 'webkit2gtk')
 makedepends=(
-    "npm==8.19.3"
-    "nodejs==16.19.1"
+    "npm"
+    "nodejs"
     "rustup"
     "git"
     "webkit2gtk"
