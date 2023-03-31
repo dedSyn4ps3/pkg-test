@@ -6,4 +6,4 @@ Categories=GTK;System;
 StartupNotify=false
 Name=pkg-test
 Exec=/usr/bin/pkg-test
-Icon=/usr/share/icons/hicolor/32x32/apps/pkg-test.png
+Icon=/usr/share/icons/hicolor/128x128/apps/pkg-test.png

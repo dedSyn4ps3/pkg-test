@@ -1,6 +1,6 @@
 # Maintainer: Ed Rutherford <erutherford@nullsecurity.tech>
 pkgname=pkg-test
-pkgver=1.0.1
+pkgver=1.0.2
 pkgrel=1
 pkgdesc="For testing Tauri app script execution"
 arch=('x86_64')
@@ -22,7 +22,6 @@ makedepends=(
     "libappindicator-gtk3"
     "librsvg"
     "libvips"
-    "ar"
 )
 provides=("pkg-test")
 conflicts=("pkg-test")
@@ -30,7 +29,7 @@ source=("$pkgname::git+https://github.com/dedSyn4ps3/pkg-test.git")
 sha256sums=("SKIP")
 
 build() {
-    cd "$pkgname-$pkgver"
+    cd "$pkgname"
 
     echo "[+] Installing Rust Nightly…"
     rustup toolchain install nightly
@@ -44,9 +43,9 @@ build() {
 }
 
 package() {
-    cd "${pkgname}-${pkgver}/src-tauri/target/release/bundle/deb/${pkgname}_${pkgver}_amd64/data"
+    cd "${pkgname}/src-tauri/target/release/bundle/deb/${pkgname}_${pkgver}_amd64/data"
 
-    for size in 32x32 128x128 256x256; do
+    for size in 128x128 256x256@2 512x512; do
         install -Dm644 "usr/share/icons/hicolor/${size}/apps/${pkgname}.png" "${pkgdir}/usr/share/icons/hicolor/${size}/apps/${pkgname}.png"
     done
 
