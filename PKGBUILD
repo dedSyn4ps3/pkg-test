@@ -9,7 +9,7 @@ license=('MIT')
 depends=('cairo' 'desktop-file-utils' 'gdk-pixbuf2' 'glib2' 'gtk3' 'hicolor-icon-theme' 'pango' 'webkit2gtk')
 makedepends=(
     "npm"
-    "nodejs"
+    "nodejs-lts-gallium"
     "rustup"
     "git"
     "webkit2gtk"
@@ -26,19 +26,35 @@ makedepends=(
 provides=("pkg-test")
 conflicts=("pkg-test")
 source=("$pkgname::git+https://github.com/dedSyn4ps3/pkg-test.git")
+#source=("$pkgname::file:///home/eddiesneed/Documents/pkg-test")
 sha256sums=("SKIP")
 
 build() {
+    PURPLE=$(tput setaf 201)
+    WHITE=$(tput setaf 255)
+    END="\e[0m"
     cd "$pkgname"
 
-    echo "[+] Installing Rust Nightly…"
+    echo
+    echo -e "${PURPLE}|============================|${END}"
+    echo -e "${WHITE}   Installing Rust Nightly     ${END}"
+    echo -e "${PURPLE}|============================|${END}"
+
     rustup toolchain install nightly
     rustup default nightly
 
-    echo "[+] Gathering UI dependencies..."
+    echo
+    echo -e "${PURPLE}|=============================|${END}"
+    echo -e "${WHITE}   Gathering UI Dependencies     ${END}"
+    echo -e "${PURPLE}|=============================|${END}"
+
     npm install
 
-    echo "[*] STARTING BUILD [*]"
+    echo
+    echo -e "${PURPLE}|=============================|${END}"
+    echo -e "${WHITE}     Compiling Application     ${END}"
+    echo -e "${PURPLE}|=============================|${END}"
+
     npm run tauri build
 }
 
@@ -53,8 +69,11 @@ package() {
 
     install -Dm755 "usr/bin/${pkgname}" "${pkgdir}/usr/bin/${pkgname}"
 
-    install -Dm755 "usr/share/scripts/*" "${pkgdir}/usr/share/${pkgname}/scripts"
+    install -Dm755 "usr/share/scripts/update_system.sh" "${pkgdir}/usr/share/${pkgname}/scripts/update_system.sh"
 
     echo
-    echo "[*] PKGBUILD COMPLETE [*]"
+    echo -e "${PURPLE}|=============================|${END}"
+    echo -e "${WHITE}     Packaging Complete     ${END}"
+    echo -e "${PURPLE}|=============================|${END}"
+    echo
 }

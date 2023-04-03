@@ -23,4 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 *.pack
+
+# PKGBUILD related
 pkg-test
+*.pkg.tar.zst
